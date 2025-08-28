@@ -150,7 +150,6 @@ for (nutr in nutrient_names) {
 nutrients
 ```
 
-
 ```{r}
 
 nutrients_long <- nutrients %>% 
@@ -201,11 +200,11 @@ nutrients_long
 #validate if there are NAs
 table(nutrients_long$sample_id, is.na(nutrients_long$value))
 ```
+
 ```{r}
 unique(nutrients_long$sample_id)
 
 ```
-
 
 ```{r}
 #declare what date was the day of the hurricane to create a vertical dotted line for the graph
@@ -243,4 +242,3 @@ bisley_fig <- ggplot(nutrients_long, aes(x = sample_date, y = value),aes(color =
 
 bisley_fig
 ```
-
