@@ -13,7 +13,7 @@ This repository is for the EDS 214 project which its primary focus is to recreat
 # Description
 
 The project will consist of folders: 
-- Documents - A folder containing any text files
+- Docs - A folder containing any text files
 - Figures - A folder containing any visuals and saved images 
 - Data - A folder containing only raw data 
 - Output - A folder that includes functions, any renderings, outfitted/cleaned data sets
@@ -29,7 +29,6 @@ The project will consist of folders:
 # Contents
 
 -   Contents within the repository will include the raw data in the data folder, functions, analysis scripts, supporting code, cleaned and formatted data and any visuals needed.
--   
 
 # Data Access Details
 

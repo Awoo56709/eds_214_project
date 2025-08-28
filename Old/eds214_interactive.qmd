@@ -160,31 +160,31 @@ for (nutr in nutrient_names) {
 ```{r}
 
 #Data is now clean, we need to now create a groupby only of our cleaned nutrients that were interested in
-<<<<<<< HEAD
+
 #nutrients <- bisley_all %>% 
 #  group_by(sample_id) %>%
 #  mutate(across(
 #    c(k, no3_n, mg, ca, nh4_n)))
     #,
-=======
-nutrients <- bisley_all %>% 
-  group_by(sample_id) %>%
-  mutate(across(
-    c(k, no3_n, mg, ca, nh4_n)))
+
+#nutrients <- bisley_all %>% 
+ # group_by(sample_id) %>%
+  #mutate(across(
+   # c(k, no3_n, mg, ca, nh4_n)))
  #   ,
->>>>>>> 51d324bb5a2600047c36a6e15d92694d8d8e0247
+
     #introducing the rollmean function that will section our years into 9 sections for the means
     
 #Creating the rolling Mean
     
 #    ~ rollmean(., k = 9, fill = NA, align = "right"),
-<<<<<<< HEAD
+
 #    .names = "{.col}_rollmean9"
 #  )) %>%
-=======
+
  #   .names = "{.col}_rollmean9"
   #)) %>%
->>>>>>> 51d324bb5a2600047c36a6e15d92694d8d8e0247
+
 #  ungroup()
 ```
 

@@ -3,8 +3,6 @@ title: "EDS_214_Project_Analysis"
 format: html
 editor: visual
 echo: true
-warning: false
-message: false
 ---
 
 ---
@@ -96,6 +94,7 @@ nutrients <- bisley_all %>%
 
 ```{r}
 #verifying the new table
+#add this to outputs
 nutrients
 ```
 
@@ -103,32 +102,20 @@ nutrients
 
 ```{r}
 #Creating the rolling average function
+#will need to add this to R and call the function <<<<<<<<<<------------------------------
 
 moving_average <- function(focal_date, Sample_Date, conc, wind_size_weeks) {
-  #Which dates are in the window
+    #Which dates are in the window
   is_in_window <- (Sample_Date > focal_date - (wind_size_weeks / 2) * 7) &
     (Sample_Date < focal_date + (wind_size_weeks / 2) * 7)
-  #find the associated concentrations
+    #find the associated concentrations
   window_conc <- conc[is_in_window]
-  #calculate the mean
-  #needs to determine if i will remove the NAs
+    #calculate the mean
+    #needs to determine if i will remove the NAs
   result <- mean(window_conc, na.rm = FALSE) #<<<<<<<<<<-----------------------------------
   
   return(result)
 }
-```
-
-```{r}
-#Calling the function given specific arguments for our 9 week rolling average, adding a column for ONLY CA
-
-
-#nutrients$calc_rolling <- sapply(
-#  nutrients$sample_date,
- # moving_average,
-  #Sample_Date = nutrients$sample_date,
-  #conc = nutrients$ca,
-  #wind_size_weeks = 9
-#)
 ```
 
 # Create a for loop to iterate through the nutrients we want to get the rolling averages
@@ -142,45 +129,29 @@ for (nutr in nutrient_names) {
   new_col <- paste0(nutr, "_rollmean9")
 # in the new column, use sapply() based on the sample date and moving average
  nutrients[[new_col]] <- sapply(
+   
     nutrients$sample_date,
+
     moving_average,
     
-# 
     Sample_Date = nutrients$sample_date,
+    
     conc = nutrients[[nutr]],
+    
     wind_size_weeks = 9
   )
 }
 ```
 
 ```{r}
+#The updated nutrients table that includes the rolling mean based on if values were provided
 
-#Data is now clean, we need to now create a groupby only of our cleaned nutrients that were interested in
-#nutrients <- bisley_all %>% 
-#  group_by(sample_id) %>%
-#  mutate(across(
-#    c(k, no3_n, mg, ca, nh4_n)))
-    #,
-    #introducing the rollmean function that will section our years into 9 sections for the means
-    
-#Creating the rolling Mean
-    
-#    ~ rollmean(., k = 9, fill = NA, align = "right"),
-#    .names = "{.col}_rollmean9"
-#  )) %>%
-#  ungroup()
-```
-
-```{r}
-#bisley_all %>% 
-  #wanted to verify that there were sums in our nutrient columns
-#  summarise(across(c(k, no3_n, mg, ca, nh4_n),
-#                   ~ sum(!is.na(.)), .names = "n_nonNA_{.col}"))
+#will need to add this to the outputs folder <<<<<<<<<<<<----------------------------------
+nutrients
 ```
 
 
 ```{r}
-
 
 nutrients_long <- nutrients %>% 
   select(sample_id, 
@@ -214,12 +185,15 @@ nutrients_long <- nutrients %>%
 #%>% 
   #filter(year >= 1988, year <= 1994, !is.na(value))
 ```
+
 ```{r}
 nutrients_long <- nutrients_long %>%
   dplyr::filter(lubridate::year(sample_date) >= "1986-05-20",
                 lubridate::year(sample_date)<= "1994-12-31")
 ```
+
 ```{r}
+#
 nutrients_long
 ```
 
@@ -237,13 +211,13 @@ unique(nutrients_long$sample_id)
 #declare what date was the day of the hurricane to create a vertical dotted line for the graph
 hurricane_date <- as.Date("1989-09-18")
 
-bisley_fig <- ggplot(nutrients_long, aes(x = sample_date, y = value, color = sample_id, group =  sample_id)) +
+bisley_fig <- ggplot(nutrients_long, aes(x = sample_date, y = value),aes(color = sample_id)) +
   geom_line(linewidth = .6) +
   geom_vline(
     xintercept = as.numeric(hurricane_date),
     linetype = "dashed",
     color = "black"
-  ) +
+  ) + 
   
   
   facet_wrap(~ nutrient, scales = "free_y", ncol = 1, strip.position = "left") + #this move the nutrients to the left
@@ -252,8 +226,7 @@ bisley_fig <- ggplot(nutrients_long, aes(x = sample_date, y = value, color = sam
        x = "Date",
        y = "Concentration (mg/L",
        color = "Stream"
-  ) + 
-  theme_bw() +
+  ) +
   
   theme(
     strip.placement = "outside",

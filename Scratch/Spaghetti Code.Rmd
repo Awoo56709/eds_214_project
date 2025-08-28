@@ -35,18 +35,13 @@ bisley_all
 ```
 
 ```{r}
-# Create a function where it includes a function where it will compute rolling means based on the column name or nutrient name
-
-```
-
-```{r}
 #originally was going to use rollmean function
 
-bisley_all$K_rm <- rollmean(bisley_all$K,9,fill=NA,align="center")
-bisley_all$NO3_rm <- rollmean(bisley_all$NO3.N,9,fill=NA,align="center")
-bisley_all$Mg_rm <- rollmean(bisley_all$Mg,9,fill=NA,align="center")
-bisley_all$Ca_rm <- rollmean(bisley_all$Ca,9,fill=NA,align="center")
-bisley_all$NH4_rm <- rollmean(bisley_all$NH4.N,9,fill=NA,align="center")
+#bisley_all$K_rm <- rollmean(bisley_all$K,9,fill=NA,align="center")
+#bisley_all$NO3_rm <- rollmean(bisley_all$NO3.N,9,fill=NA,align="center")
+#bisley_all$Mg_rm <- rollmean(bisley_all$Mg,9,fill=NA,align="center")
+#bisley_all$Ca_rm <- rollmean(bisley_all$Ca,9,fill=NA,align="center")
+#bisley_all$NH4_rm <- rollmean(bisley_all$NH4.N,9,fill=NA,align="center")
 ```
 
 ```{r}
@@ -73,6 +68,31 @@ moving_average <- function(focal_date, Sample_Date, conc, wind_size_weeks) {
 ```
 
 ```{r}
+
+#Data is now clean, we need to now create a groupby only of our cleaned nutrients that were interested in
+#nutrients <- bisley_all %>% 
+#  group_by(sample_id) %>%
+#  mutate(across(
+#    c(k, no3_n, mg, ca, nh4_n)))
+    #,
+    #introducing the rollmean function that will section our years into 9 sections for the means
+    
+#Creating the rolling Mean
+    
+#    ~ rollmean(., k = 9, fill = NA, align = "right"),
+#    .names = "{.col}_rollmean9"
+#  )) %>%
+#  ungroup()
+```
+
+```{r}
+#bisley_all %>% 
+  #wanted to verify that there were sums in our nutrient columns
+#  summarise(across(c(k, no3_n, mg, ca, nh4_n),
+#                   ~ sum(!is.na(.)), .names = "n_nonNA_{.col}"))
+```
+
+```{r}
 #Finding rolling average for ca
 nutrients$sample_date <- as.Date(nutrients$sample_date)
 
@@ -80,18 +100,6 @@ ca_ma_once <- moving_average(focal_date = as.Date("1986-05-20"),
                              Sample_Date = nutrients$sample_date,
                              conc = nutrients$ca,
                              wind_size_weeks = 9)
-```
-
-
-```{r}
-#Verifying the solution
-tiny_problem$Sample_date <- as.date(tiny_problem$sample_date)
-
-ca_ma_once <- moving_average(focal_date = as.Date("2001-12-04"),
-                             dates = tiny_problem$sample_date,
-                             conc = tiny_problem$ca,
-                             wind_size_weeks = 9)
-
 ```
 
 
