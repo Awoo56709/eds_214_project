@@ -155,7 +155,6 @@ bisley_fig <- ggplot(
     date_labels = "%Y",
     expand = c(0,0)
   )
-#change
 bisley_fig
 ```
 

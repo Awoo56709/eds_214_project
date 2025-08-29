@@ -6,7 +6,7 @@ wrap: 72
 
 # EDS 214 Project - Figure Reproduction
 
-This repository is for the EDS 214 project to recreate figure 3 from Schaefer et al. 2000. This project will be open-ended in that scripts, assumptions and documentation will be created at an ongoing basis aiding in the recreation of the figure. Below is the image to be recreated:
+This repository is for the EDS 214 project to recreate figure 3 from Schaefer et al. 2000. This project will be open-ended in that scripts, assumptions and documentation will be created at an ongoing basis aiding in the recreation of the figure. Through this analysis, we will be utilizing the "Rolling Average" function (explained in the Analysis section). Below is the image to be recreated:
  
 <img src="https://github.com/user-attachments/assets/ea634bda-fc23-4263-8b63-ce28e4c3ce61" alt="image" width="350" height="500"/>
 
@@ -41,12 +41,18 @@ This repository is for the EDS 214 project to recreate figure 3 from Schaefer et
   
 ## Flowchart & Analysis
 
-![](flowchart.png)
+![](flowchart.jpeg)
 - Stored data will be exported to csv files
 - The csv files will be read in to RStudio to view initial raw observations
 - Functions and methods will be applied to clean and manipulate the data
 - After data is cleaned, processes/methods will further be applied for verification and shaping/manipulation of data for analysis
 - The manipulated observations are now prepared for visualization to create figures and conclusions of our data
+
+## Functions
+
+- Rolling Mean Function: This function's purpose is to develop a mean for each date in the data set based on certain assumptions/assertions:
+  - Each date will be assumed to be the "middle" or focal date for the function.
+  - We will use a 9 week window
 
 ## References
 

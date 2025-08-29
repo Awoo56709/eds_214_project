@@ -13,7 +13,7 @@ editor: visual
 
 #Importing Libraries/Data
 
-```{r}
+```{r, echo = FALSE, results = 'hide'}
 # Load libraries
 library(tidyverse)
 library(lubridate)
@@ -22,6 +22,7 @@ library(janitor)
 ```
 
 ```{r}
+
 # Load and label data
 bisley_1 <- read.csv(here::here("data", 'QuebradaCuenca1-Bisley.csv'), na = c("-99999", "")) |> janitor::clean_names()
 bisley_2 <- read.csv(here::here("data","QuebradaCuenca2-Bisley.csv"), na = c("-99999", "")) |> janitor::clean_names()
@@ -30,7 +31,7 @@ prm <- read.csv(here::here("data","RioMameyesPuenteRoto.csv"), na = c("-99999", 
 
 ```
 
-```{r}
+```{r, echo = FALSE, results = 'hide'}
 # Combine datasets
 bisley_all <- bind_rows(bisley_1, bisley_2, bisley_3, prm)
 ```
@@ -41,7 +42,7 @@ nutrients <- c("k", "no3_n", "mg", "ca", "nh4_n")
 
 ```
 
-```{r}
+```{r, results = 'hide', warning:FALSE}
 # Reshape to long format with lowercase column names
 nutrients_long <- bisley_all %>%
   rename_with(tolower) %>%
@@ -72,7 +73,7 @@ moving_average <- function(focal_date, dates, values, window_weeks = 9) {
 }
 ```
 
-```{r}
+```{r, echo = FALSE, results = 'hide'}
 # Apply rolling average per site and nutrient
 nutrients_long <- nutrients_long %>%
   group_by(sample_id, nutrient) %>%
@@ -89,14 +90,14 @@ nutrients_long <- nutrients_long %>%
 #write.csv(nutrients_long, here("Outputs","rm_long_data.csv"))
 ```
 
-```{r}
+```{r, echo = FALSE, results = 'hide'}
 # Filter to desired date range
 nutrients_long <- nutrients_long %>%
   filter(sample_date >= as.Date("1988-01-01"), sample_date <= as.Date("1994-12-31"))
 
 ```
 
-```{r}
+```{r,, echo = FALSE, results = 'hide'}
 # plotting the replication
 # establishing the hurricane date
 hurricane_date <- as.Date("1989-09-18")
@@ -149,4 +150,5 @@ bisley_fig <- ggplot(
   )
 
 bisley_fig
+
 ```
