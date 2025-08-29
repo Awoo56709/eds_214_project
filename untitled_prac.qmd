@@ -1,0 +1,144 @@
+---
+title: "EDS_214_Project_Analysis"
+format: html
+editor: visual
+echo: true
+---
+
+---
+title: "EDS_214_Project_Analysis"
+format: html
+editor: visual
+---
+
+
+
+```{r}
+# Load libraries
+library(tidyverse)
+library(lubridate)
+library(here)
+```
+
+```{r}
+# Load and label data
+bisley_1 <- read.csv(here::here("data", 'QuebradaCuenca1-Bisley.csv'), na = c("-99999", "")) |> janitor::clean_names()
+bisley_2 <- read.csv(here::here("data","QuebradaCuenca2-Bisley.csv"), na = c("-99999", "")) |> janitor::clean_names()
+bisley_3 <- read.csv(here::here("data","QuebradaCuenca3-Bisley.csv"), na = c("-99999", "")) |> janitor::clean_names()
+prm <- read.csv(here::here("data","RioMameyesPuenteRoto.csv"), na = c("-99999", "")) |> janitor::clean_names()
+
+```
+
+
+```{r}
+# Combine datasets
+bisley_all <- bind_rows(bisley_1, bisley_2, bisley_3, prm)
+```
+
+
+```{r}
+# Define nutrient columns
+nutrients <- c("k", "no3_n", "mg", "ca", "nh4_n")
+
+```
+
+
+```{r}
+# Reshape to long format with lowercase column names
+nutrients_long <- bisley_all %>%
+  rename_with(tolower) %>%
+  select(sample_id, sample_date, all_of(nutrients)) %>%
+  pivot_longer(cols = all_of(nutrients), names_to = "nutrient", values_to = "concentration") %>%
+  mutate(
+    sample_date = as.Date(sample_date),
+    concentration = as.numeric(concentration)
+  ) %>%
+  filter(!is.na(concentration), concentration >= 0)
+
+```
+
+
+```{r}
+# Define rolling average function
+moving_average <- function(focal_date, dates, values, window_weeks = 9) {
+  window_days <- (window_weeks / 2) * 7
+  in_window <- dates >= (focal_date - window_days) & dates <= (focal_date + window_days)
+  mean(values[in_window], na.rm = TRUE)
+}
+```
+
+
+```{r}
+# Apply rolling average per site and nutrient
+nutrients_long <- nutrients_long %>%
+  group_by(sample_id, nutrient) %>%
+  arrange(sample_date) %>%
+  mutate(
+    value = sapply(sample_date, function(fd) {
+      moving_average(fd, sample_date, concentration, window_weeks = 9)
+    })
+  ) %>%
+  ungroup()
+```
+
+
+```{r}
+# Filter to desired date range
+nutrients_long <- nutrients_long %>%
+  filter(sample_date >= as.Date("1988-01-01"), sample_date <= as.Date("1994-12-31"))
+
+```
+
+```{r}
+# Plot
+hurricane_date <- as.Date("1989-09-18")
+
+bisley_fig <- ggplot(
+  nutrients_long, 
+  aes(x = sample_date, 
+      y = value, 
+      color = sample_id,
+      group = sample_id)
+      ) +
+  
+  geom_line(linewidth = .6) +
+  geom_vline(
+    xintercept = as.numeric(hurricane_date),
+    linetype = "dashed",
+    color = "black"
+  ) + 
+  
+  facet_wrap(~ nutrient, scales = "free_y", ncol = 1, strip.position = "left") +
+  labs(title = "Bisley Nutrient Concentrations by 9-week Moving Averages",
+       subtitle = "Dashed line = Hurricane Hugo Disruption",
+       x = "Date",
+       y = "Concentration (mg/L)",
+       color = "Stream"
+  ) +
+  
+  theme(
+    strip.placement = "outside",
+    strip.text.y.left = element_text(angle = 45),
+    strip.background = element_rect(fill = "grey"),
+    legend.position.inside = c(0.05, .95),
+    legend.justification = c("left","top"),
+    panel.grid.minor = element_blank()
+  ) +
+  scale_x_date(
+    date_breaks = "1 year",
+    date_labels = "%Y",
+    expand = c(0,0)
+  )
+
+bisley_fig
+```
+
+
+
+
+
+
+
+
+
+

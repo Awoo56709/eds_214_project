@@ -13,8 +13,8 @@ This repository is for the EDS 214 project which its primary focus is to recreat
 # Description
 
 The project will consist of folders: 
-- Docs - A folder containing any text files
-- Figures - A folder containing any visuals and saved images 
+- [Docs](https://github.com/Awoo56709/eds_214_project/tree/main/docs) - A folder containing any text files
+- [Figures]() - A folder containing any visuals and saved images 
 - Data - A folder containing only raw data 
 - Output - A folder that includes functions, any renderings, outfitted/cleaned data sets
 - Scripts - A folder containing only scripts for cleaning/data wrangling
