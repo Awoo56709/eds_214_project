@@ -30,12 +30,10 @@ prm <- read.csv(here::here("data","RioMameyesPuenteRoto.csv"), na = c("-99999", 
 
 ```
 
-
 ```{r}
 # Combine datasets
 bisley_all <- bind_rows(bisley_1, bisley_2, bisley_3, prm)
 ```
-
 
 ```{r}
 # Define nutrient columns
@@ -43,47 +41,53 @@ nutrients <- c("k", "no3_n", "mg", "ca", "nh4_n")
 
 ```
 
-
 ```{r}
 # Reshape to long format with lowercase column names
 nutrients_long <- bisley_all %>%
   rename_with(tolower) %>%
+  #selecting the columns, new columns will be named
   select(sample_id, sample_date, all_of(nutrients)) %>%
   pivot_longer(cols = all_of(nutrients), names_to = "nutrient", values_to = "concentration") %>%
   mutate(
+    #changing the sample date from char to date type
     sample_date = as.Date(sample_date),
+    #ensuring values in concentration are numeric type
     concentration = as.numeric(concentration)
   ) %>%
+  #filtering values that are not NA and positive
   filter(!is.na(concentration), concentration >= 0)
 
 #write.csv(nutrients_long, here("Outputs","long_data.csv"))
 ```
 
-
 ```{r}
-# Define rolling average function
+# Define rolling average function with focal date, dates, concentration and window weeks 
 moving_average <- function(focal_date, dates, values, window_weeks = 9) {
+  #define window days below so we dont have to calculate both lower and higher
   window_days <- (window_weeks / 2) * 7
+  #in window will be the taking on the lower and the higher end of our limit
   in_window <- dates >= (focal_date - window_days) & dates <= (focal_date + window_days)
+    #getting the result for values within the window at a specific date
   mean(values[in_window], na.rm = TRUE)
 }
 ```
-
 
 ```{r}
 # Apply rolling average per site and nutrient
 nutrients_long <- nutrients_long %>%
   group_by(sample_id, nutrient) %>%
+  #arranging by sample date
   arrange(sample_date) %>%
   mutate(
+    #for every element in sample_date, focal_date calculate the value
     value = sapply(sample_date, function(fd) {
       moving_average(fd, sample_date, concentration, window_weeks = 9)
     })
   ) %>%
+  #ungroup to not change the shape of the data and ensure future calculations are not affected
   ungroup()
 #write.csv(nutrients_long, here("Outputs","rm_long_data.csv"))
 ```
-
 
 ```{r}
 # Filter to desired date range
@@ -93,9 +97,11 @@ nutrients_long <- nutrients_long %>%
 ```
 
 ```{r}
-# Plot
+# plotting the replication
+# establishing the hurricane date
 hurricane_date <- as.Date("1989-09-18")
 
+#using the pivot, we plot using sample date and value and color based on site ID
 bisley_fig <- ggplot(
   nutrients_long, 
   aes(x = sample_date, 
@@ -104,14 +110,18 @@ bisley_fig <- ggplot(
       group = sample_id)
       ) +
   
-  geom_line(linewidth = .6) +
+#changing the width of the lines
+  geom_line(linewidth = .5) +
+#creating an x-axis intercept for the hurricane
   geom_vline(
     xintercept = as.numeric(hurricane_date),
     linetype = "dashed",
     color = "black"
   ) + 
   
+#creating multiple panels with each graph having its own y-axis for each nutrient and labels to the left
   facet_wrap(~ nutrient, scales = "free_y", ncol = 1, strip.position = "left") +
+  
   labs(title = "Bisley Nutrient Concentrations by 9-week Moving Averages",
        subtitle = "Dashed line = Hurricane Hugo Disruption",
        x = "Date",
@@ -120,12 +130,17 @@ bisley_fig <- ggplot(
   ) +
   
   theme(
+    
+    #having the nutrient labels outside our graphs
     strip.placement = "outside",
+    #changing the text in the strips are 45 degrees for readability
     strip.text.y.left = element_text(angle = 45),
-    strip.background = element_rect(fill = "grey"),
+    #coloring the rectangles white due to default being grey
+    strip.background = element_rect(fill = "white"),
+    #the nextr three lines moves the legend to the top corner
     legend.position.inside = c(0.05, .95),
-    legend.justification = c("left","top"),
-    panel.grid.minor = element_blank()
+    #the top left corner will be placed at the above coordinates
+    legend.justification = c("right","top")
   ) +
   scale_x_date(
     date_breaks = "1 year",
