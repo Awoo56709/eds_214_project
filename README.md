@@ -15,24 +15,23 @@ This repository is for the EDS 214 project to recreate figure 3 from Schaefer et
 
 ## Purpose
 
--   The purpose of this project is to recreate the figure from the study and prove accessibility of reproducibility within a 20+ year old study given the data used, the tools such as RStudio and the various libraries.
+-   The purpose of this project is to recreate the figure from the study and prove accessibility of reproducibility within a 20+ year old study given the data used, the tools such as RStudio and the various RStudio libraries.
 
 ## Contents
 
--   Contents within the repository will include the raw data in the data folder, functions, analysis scripts, supporting code, cleaned and formatted data and any visuals needed.
+-   Contents within the repository will include the raw data in the data folder, functions, analysis scripts, supporting code, cleaned and formatted data and any visuals developed.
 
 ## Description
 
 - The project will consist of folders: 
-  - [Docs](https://github.com/Awoo56709/eds_214_project/tree/main/docs) - A folder containing any text files
-  - [Figures]() - A folder containing any visuals and saved images 
+  - [Paper](https://github.com/Awoo56709/eds_214_project/tree/main/paper) - A folder containing any text files
+  - [Figures](https://github.com/Awoo56709/eds_214_project/tree/main/Figures) - A folder containing any visuals and saved images 
   - [Data](https://github.com/Awoo56709/eds_214_project/tree/main/Data) - A folder containing only raw data 
-  - [Output](https://github.com/Awoo56709/eds_214_project/tree/main/Outputs) - A folder that includes functions, any renderings, outfitted/cleaned data sets
   - [Scripts](https://github.com/Awoo56709/eds_214_project/tree/main/Scripts) - A folder containing only scripts for cleaning/data wrangling
-  - [Output](https://github.com/Awoo56709/eds_214_project/tree/main/Outputs) - This will contain Quarto docs, supporting code for updated data, groupbys, graphing code
-  - [Old](https://github.com/Awoo56709/eds_214_project/tree/main/Old) - Will contain sandboxes for exploratory data
-  - [Scratch](https://github.com/Awoo56709/eds_214_project/tree/main/Scratch)
-  - [R](https://github.com/Awoo56709/eds_214_project/tree/main/R) - A folder to house used functions
+  - [Outputs](https://github.com/Awoo56709/eds_214_project/tree/main/Outputs) - This will contain Quarto docs, supporting code for cleaned data, groupbys, renderings
+  - [Old](https://github.com/Awoo56709/eds_214_project/tree/main/Old) - Contains sandboxes for exploratory data
+  - [Scratch](https://github.com/Awoo56709/eds_214_project/tree/main/Scratch) - Includes sandboxes for data exploration and testing
+  - [R](https://github.com/Awoo56709/eds_214_project/tree/main/R) - A folder to house functions
 
 ## Data Access Details
 
