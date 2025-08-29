@@ -40,6 +40,16 @@ This repository is for the EDS 214 project to recreate figure 3 from Schaefer et
   - QuebradaCuenca-Bisley 2 CSV
   - QuebradaCuenca-Bisley 3 CSV
   - Puente Roto Mameyes CSV
+  
+## Flowchart & Analysis
+
+![](flowchart.png)
+- Stored data will be exported to csv files
+- The csv files will be read in to RStudio to view initial raw observations
+- Functions and methods will be applied to clean and manipulate the data
+- After data is cleaned, processes/methods will further be applied for verification and shaping/manipulation of data for analysis
+- The manipulated observations are now prepared for visualization to create figures and conclusions of our data
+
 ## References
 
 -   Data Source <https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-luq.20.4923064>
