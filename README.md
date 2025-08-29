@@ -41,7 +41,7 @@ This repository is for the EDS 214 project to recreate figure 3 from Schaefer et
   
 ## Flowchart & Analysis
 
-![](flowchart.jpeg)
+![flow](flowchart.jpeg)
 - Stored data will be exported to csv files
 - The csv files will be read in to RStudio to view initial raw observations
 - Functions and methods will be applied to clean and manipulate the data
