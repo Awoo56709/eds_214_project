@@ -7,12 +7,6 @@ wrap: 72
 # EDS 214 Project - Figure Reproduction
 
 This repository is for the EDS 214 project to recreate figure 3 from Schaefer et al. 2000. This project will be open-ended in that scripts, assumptions and documentation will be created at an ongoing basis aiding in the recreation of the figure. Below is the image to be recreated:
- that functions, rendering
-
-<<<<<<< HEAD
-=======
- this is a merge conflict
-
 
 
 >>>>>>> c958fabbcb46f663f4336377da2d8ce4a8a6cc57

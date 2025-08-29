@@ -1,4 +1,4 @@
-#Creating an initilization environment
+#Creating an initialization environment
 
 #Adding a vector of packages needed for analysis
 package_list <- c("lubridate","here","janitor","lubridate")
