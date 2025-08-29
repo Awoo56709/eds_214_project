@@ -11,8 +11,6 @@ format: html
 editor: visual
 ---
 
-
-
 ```{r}
 # Load libraries
 library(tidyverse)
@@ -29,19 +27,16 @@ prm <- read.csv(here::here("data","RioMameyesPuenteRoto.csv"), na = c("-99999", 
 
 ```
 
-
 ```{r}
 # Combine datasets
 bisley_all <- bind_rows(bisley_1, bisley_2, bisley_3, prm)
 ```
-
 
 ```{r}
 # Define nutrient columns
 nutrients <- c("k", "no3_n", "mg", "ca", "nh4_n")
 
 ```
-
 
 ```{r}
 # Reshape to long format with lowercase column names
@@ -57,7 +52,6 @@ nutrients_long <- bisley_all %>%
 
 ```
 
-
 ```{r}
 # Define rolling average function
 moving_average <- function(focal_date, dates, values, window_weeks = 9) {
@@ -66,7 +60,6 @@ moving_average <- function(focal_date, dates, values, window_weeks = 9) {
   mean(values[in_window], na.rm = TRUE)
 }
 ```
-
 
 ```{r}
 # Apply rolling average per site and nutrient
@@ -80,7 +73,6 @@ nutrients_long <- nutrients_long %>%
   ) %>%
   ungroup()
 ```
-
 
 ```{r}
 # Filter to desired date range
@@ -132,13 +124,3 @@ bisley_fig <- ggplot(
 
 bisley_fig
 ```
-
-
-
-
-
-
-
-
-
-
