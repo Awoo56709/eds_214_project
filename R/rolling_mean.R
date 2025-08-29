@@ -10,7 +10,9 @@
 #' @returns
 #' @export
 #'
-#' @examples
+#' @examples 
+#' 
+#' 
 # moving_average <- function(focal_date, Sample_Date, conc, wind_size_weeks) {
 #   #Which dates are in the window
 #   is_in_window <- (Sample_Date > focal_date - (wind_size_weeks / 2) * 7) &
