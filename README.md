@@ -4,40 +4,49 @@ markdown:
 wrap: 72
 ---
 
-# EDS 214 Project
+# EDS 214 Project - Figure Reproduction
 
-This repository is for the EDS 214 project which its primary focus is to recreate figure 3 from Schaefer et al. 2000. This project will be open-ended in that functions, rendering, scripts, assumptions and documentation will be either created or aiding in the recreation of the figure. Below is the image of focus:
+This repository is for the EDS 214 project to recreate figure 3 from Schaefer et al. 2000. This project will be open-ended in that scripts, assumptions and documentation will be created at an ongoing basis aiding in the recreation of the figure. Below is the image to be recreated:
+ that functions, rendering
+ 
+ 
+<img src="https://github.com/user-attachments/assets/ea634bda-fc23-4263-8b63-ce28e4c3ce61" alt="image" width="350" height="500"/>
 
-<img src="https://github.com/user-attachments/assets/ea634bda-fc23-4263-8b63-ce28e4c3ce61" alt="image" width="700" height="1000"/>
 
-# Description
-
-The project will consist of folders: 
-- [Docs](https://github.com/Awoo56709/eds_214_project/tree/main/docs) - A folder containing any text files
-- [Figures]() - A folder containing any visuals and saved images 
-- Data - A folder containing only raw data 
-- Output - A folder that includes functions, any renderings, outfitted/cleaned data sets
-- Scripts - A folder containing only scripts for cleaning/data wrangling
-- Output - This will contain Quarto docs, supporting code for updated data, groupbys, graphing code
-- Old - Will contain sandboxes for exploratory/spaghetti code
-- R - A folder to house used functions
-
-# Purpose
+## Purpose
 
 -   The purpose of this project is to recreate the figure from the study and prove accessibility of reproducibility within a 20+ year old study given the data used, the tools such as RStudio and the various libraries.
 
-# Contents
+## Contents
 
 -   Contents within the repository will include the raw data in the data folder, functions, analysis scripts, supporting code, cleaned and formatted data and any visuals needed.
 
-# Data Access Details
+## Description
 
--   Data accessed was sourced at the EDI Data Portal. Specifically relating to the "Chemistry of Stream Water from the Liquillo Mountains. The data recorded weekly water samples and nutrient levels at the Luquillo Mountain before and after a hurricane - The data sets that were used were QuebradaCuenca-Bisley 1,2,3 CSV files
+- The project will consist of folders: 
+  - [Docs](https://github.com/Awoo56709/eds_214_project/tree/main/docs) - A folder containing any text files
+  - [Figures]() - A folder containing any visuals and saved images 
+  - [Data](https://github.com/Awoo56709/eds_214_project/tree/main/Data) - A folder containing only raw data 
+  - [Output](https://github.com/Awoo56709/eds_214_project/tree/main/Outputs) - A folder that includes functions, any renderings, outfitted/cleaned data sets
+  - [Scripts](https://github.com/Awoo56709/eds_214_project/tree/main/Scripts) - A folder containing only scripts for cleaning/data wrangling
+  - [Output](https://github.com/Awoo56709/eds_214_project/tree/main/Outputs) - This will contain Quarto docs, supporting code for updated data, groupbys, graphing code
+  - [Old](https://github.com/Awoo56709/eds_214_project/tree/main/Old) - Will contain sandboxes for exploratory data
+  - [Scratch](https://github.com/Awoo56709/eds_214_project/tree/main/Scratch)
+  - [R](https://github.com/Awoo56709/eds_214_project/tree/main/R) - A folder to house used functions
 
-# References
+## Data Access Details
+
+-   Data accessed was sourced at the EDI Data Portal. Specifically relating to the *"Chemistry of Stream Water from the Liquillo Mountains*. The data recorded weekly water samples and nutrient levels at the Luquillo Mountain before and after a hurricane - The data sets that were utilized were:
+  - QuebradaCuenca-Bisley 1 CSV
+  - QuebradaCuenca-Bisley 2 CSV
+  - QuebradaCuenca-Bisley 3 CSV
+  - Puente Roto Mameyes CSV
+## References
 
 -   Data Source <https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-luq.20.4923064>
 
-# Work Cited
+## References
 
-McDowell, W. and International Institute of Tropical Forestry(IITF), USDA Forest Service.. 2024. Chemistry of stream water from the Luquillo Mountains ver 4923064. Environmental Data Initiative. <https://doi.org/10.6073/pasta/f31349bebdc304f758718f4798d25458> (Accessed 2025-08-25).
+- Schaefer, Doug & McDowell, William & Scatena, Frederick & Asbury, Clyde. (2000). *Effects of Hurricane Disturbance on Stream Water Concentrations and Fluxes in Eight Tropical Forest Watersheds of the Luquillo Experimental Forest, Puerto Rico*. Departmental Papers (EES). 16. 10.1017/S0266467400001358.
+
+- McDowell, W. and International Institute of Tropical Forestry(IITF), USDA Forest Service.. 2024. Chemistry of stream water from the Luquillo Mountains ver 4923064. Environmental Data Initiative. <https://doi.org/10.6073/pasta/f31349bebdc304f758718f4798d25458> (Accessed 2025-08-25).
