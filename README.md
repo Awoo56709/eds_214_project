@@ -8,7 +8,11 @@ wrap: 72
 
 This repository is for the EDS 214 project to recreate figure 3 from Schaefer et al. 2000. This project will be open-ended in that scripts, assumptions and documentation will be created at an ongoing basis aiding in the recreation of the figure. Below is the image to be recreated:
  that functions, rendering
+
  this is a merge conflict
+
+
+
  
 <img src="https://github.com/user-attachments/assets/ea634bda-fc23-4263-8b63-ce28e4c3ce61" alt="image" width="350" height="500"/>
 
